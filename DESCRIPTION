@@ -7,3 +7,5 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
+URL: https://github.com/nbenn/s3vec
+BugReports: https://github.com/nbenn/s3vec/issues
