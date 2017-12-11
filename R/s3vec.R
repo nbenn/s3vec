@@ -35,8 +35,10 @@ s3vec <- function(...) {
 #' 
 new_s3vec <- function(x) {
 
-  assert_that(is.list(x),
-              Reduce(identical, lapply(x, class)))
+  assert_that(is.list(x))
+
+  if (length(x) > 1L)
+    assert_that(Reduce(identical, lapply(x, class)))
 
   sub_class <- unlist(unique(lapply(x, class)))
 
