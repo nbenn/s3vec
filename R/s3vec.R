@@ -1,1 +1,41 @@
+
+#' @importFrom assertthat assert_that
 NULL
+
+#' Construct an s3vec object
+#'
+#' \code{new_s3vec} is a low-level constructor that takes a list of
+#' s3 objects of the same class. \code{s3vec} constructs an s3vec from
+#' individual s3 objects.
+#'
+#' @param ... Individual s3 objects
+#' @param x A list of s3 objects
+#' 
+#' @return An s3vec object that wraps around the supplied s3 objects.
+#' 
+#' @examples
+#' a <- structure("a", class = "foo")
+#' b <- structure("b", class = "foo")
+#'
+#' new_s3vec(list(a, b))
+#' s3vec(a, b)
+#' 
+#' @export
+#' 
+s3vec <- function(...) {
+  new_s3vec(list(...))
+}
+
+#' @rdname s3vec
+#' 
+#' @export
+#' 
+new_s3vec <- function(x) {
+
+  assert_that(is.list(x),
+              Reduce(identical, lapply(x, class)))
+
+  sub_class <- unlist(unique(lapply(x, class)))
+
+  structure(x, class = c(sub_class, "s3vec"))
+}

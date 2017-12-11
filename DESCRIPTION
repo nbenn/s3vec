@@ -13,3 +13,4 @@ Suggests:
     testthat
 Imports: 
     assertthat
+RoxygenNote: 6.0.1
