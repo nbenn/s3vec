@@ -31,6 +31,6 @@ b <- structure("b", class = "foo")
 new_s3vec(list(a, b))
 s3vec(a, b)
 
-as.blob(list(a, b))
+as.s3vec(list(a, b))
 
 }
