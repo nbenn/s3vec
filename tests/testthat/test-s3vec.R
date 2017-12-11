@@ -5,7 +5,7 @@ test_that("object creation works", {
   b <- structure("b", class = "foo")
   expect_s3_class(s3vec(a, b), c("foo", "s3vec"))
   expect_identical(s3vec(a, b),
-                  new_s3vec(list(a, b)))
+                   new_s3vec(list(a, b)))
   c <- structure("c", class = "bar")
   expect_error(s3vec(a, b, c))
 
@@ -13,7 +13,10 @@ test_that("object creation works", {
   b <- structure("b", class = c("foo", "bar"))
   expect_s3_class(s3vec(a, b), c("foo", "bar", "s3vec"))
   expect_identical(s3vec(a, b),
-                  new_s3vec(list(a, b)))
+                   new_s3vec(list(a, b)))
   c <- structure("c", class = "foobar")
   expect_error(s3vec(a, b, c))
+
+  expect_identical(s3vec(a, b), as.s3vec(s3vec(a, b)))
+  expect_identical(s3vec(a, b), as.s3vec(list(a, b)))
 })
