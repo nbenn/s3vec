@@ -10,7 +10,10 @@ ByteCompile: true
 URL: https://github.com/nbenn/s3vec
 BugReports: https://github.com/nbenn/s3vec/issues
 Suggests: 
-    testthat
+    testthat,
+    covr
 Imports: 
     assertthat
 RoxygenNote: 6.0.1
+Depends: 
+    R (>= 3.1)
