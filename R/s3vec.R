@@ -7,12 +7,11 @@ NULL
 #' \code{new_s3vec} is a low-level constructor that takes a list of
 #' s3 objects of the same class. \code{s3vec} constructs an s3vec from
 #' individual s3 objects and \code{as.blob} is a S3 generic that converts
-#' existing objects.
+#' existing objects. \code{is_s3vec} or \code{is.s3vec} test whether the object
+#' is an s3vec object.
 #'
 #' @param ... Individual s3 objects
 #' @param x A list of s3 objects, or other object to coerce
-#' 
-#' @return An s3vec object that wraps around the supplied s3 objects.
 #' 
 #' @examples
 #' a <- structure("a", class = "foo")
@@ -35,12 +34,9 @@ s3vec <- function(...) {
 #' 
 new_s3vec <- function(x) {
 
-  assert_that(is.list(x))
+  assert_that(has_common_class(x))
 
-  if (length(x) > 1L)
-    assert_that(Reduce(identical, lapply(x, class)))
-
-  sub_class <- unlist(unique(lapply(x, class)))
+  sub_class <- get_common_class(x)
 
   structure(x, class = c(sub_class, "s3vec"))
 }
@@ -62,3 +58,23 @@ as.s3vec.s3vec <- function(x, ...) {
 as.s3vec.list <- function(x, ...) {
   new_s3vec(x)
 }
+
+#' @export
+is_s3vec <- function(x) {
+
+  if (!inherits(x, "s3vec") || !has_common_class(x))
+    return(FALSE)
+
+  all_classes <- class(x)
+
+  if (all_classes[length(all_classes)] != "s3vec")
+    return(FALSE)
+
+  if (length(all_classes) <= 1L)
+    return(FALSE)
+
+  get_s3vec_subclass(x) == get_common_class(x)
+}
+
+#' @export
+is.s3vec <- is_s3vec
