@@ -1,3 +1,24 @@
+
+#' @export
+is_s3vec <- function(x) {
+
+  if (!inherits(x, "s3vec") || !has_common_class(x))
+    return(FALSE)
+
+  all_classes <- class(x)
+
+  if (all_classes[length(all_classes)] != "s3vec")
+    return(FALSE)
+
+  if (length(all_classes) <= 1L)
+    return(FALSE)
+
+  isTRUE(get_s3vec_subclass(x) == get_common_class(x))
+}
+
+#' @export
+is.s3vec <- is_s3vec
+
 get_common_class <- function(x) {
 
   assert_that(has_common_class(x))
