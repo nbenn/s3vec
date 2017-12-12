@@ -52,5 +52,10 @@ test_that("testing for s3vec objects", {
   expect_false(is_s3vec(
     structure(list(structure("a", class = "foo"),
                    structure("b", class = "bar")), class = c("bar", "s3vec"))))
+})
 
+test_that("object destruction works", {
+  a <- structure("a", class = c("foo", "bar"))
+  b <- structure("b", class = c("foo", "bar"))
+  expect_equal(as.list(s3vec(a, b)), list(a, b))
 })
