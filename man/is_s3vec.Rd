@@ -14,10 +14,10 @@ In order for an object to be considered a proper s3vec object, it has to
 }
 \details{
 \itemize{
-  \item all child elements have to be of the same class
-  \item the "s3vec" class attribute has to be in last position
-  \item the remaining class attributes have to be the ones of the child
-        elements
+\item all child elements have to be of the same class
+\item the "s3vec" class attribute has to be in last position
+\item the remaining class attributes have to be the ones of the child
+elements
 }
 }
 \examples{

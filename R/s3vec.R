@@ -4,10 +4,10 @@ NULL
 
 #' Construct an s3vec object
 #'
-#' \code{new_s3vec} is a low-level constructor that takes a list of
-#' s3 objects of the same class. \code{s3vec} constructs an s3vec from
-#' individual s3 objects and \code{as.blob} is a S3 generic that converts
-#' existing objects. \code{is_s3vec} or \code{is.s3vec} test whether the object
+#' `new_s3vec` is a low-level constructor that takes a list of
+#' s3 objects of the same class. `s3vec` constructs an s3vec from
+#' individual s3 objects and `as.s3vec` is a S3 generic that converts
+#' existing objects. `is_s3vec` or `is.s3vec` test whether the object
 #' is an s3vec object.
 #'
 #' @param ... Individual s3 objects

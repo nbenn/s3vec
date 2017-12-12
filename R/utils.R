@@ -3,12 +3,10 @@
 #'
 #' In order for an object to be considered a proper s3vec object, it has to
 #' 
-#' \itemize{
-#'   \item all child elements have to be of the same class
-#'   \item the "s3vec" class attribute has to be in last position
-#'   \item the remaining class attributes have to be the ones of the child
-#'         elements
-#' }
+#' * all child elements have to be of the same class
+#' * the "s3vec" class attribute has to be in last position
+#' * the remaining class attributes have to be the ones of the child
+#'   elements
 #' 
 #' @param x An object to test.
 #' 

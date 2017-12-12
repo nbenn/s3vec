@@ -15,5 +15,6 @@ Suggests:
 Imports: 
     assertthat
 RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
 Depends: 
     R (>= 3.1)
