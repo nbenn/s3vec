@@ -32,7 +32,9 @@ test_that("testing for s3vec objects", {
   expect_true(is_s3vec(s3vec(a)))
   expect_true(is.s3vec(s3vec(a)))
 
-  expect_true(is_s3vec(structure(list("a"), class = c("foo", "s3vec"))))
+  expect_true(is_s3vec(structure(list(structure("a", class = "foo")),
+                                 class = c("foo", "s3vec"))))
+  expect_false(is_s3vec(structure(list("a"), class = c("foo", "s3vec"))))
   expect_false(is_s3vec(structure("a", class = c("foo", "s3vec"))))
   expect_false(is_s3vec(structure(list("a"), class = c("s3vec", "foo"))))
   expect_false(is_s3vec(structure(list("a"), class = "foo")))

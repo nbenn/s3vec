@@ -1,5 +1,28 @@
 
+#' Test for an s3vec object
+#'
+#' In order for an object to be considered a proper s3vec object, it has to
+#' 
+#' \itemize{
+#'   \item all child elements have to be of the same class
+#'   \item the "s3vec" class attribute has to be in last position
+#'   \item the remaining class attributes have to be the ones of the child
+#'         elements
+#' }
+#' 
+#' @param x An object to test.
+#' 
+#' @examples
+#' a <- structure("a", class = "foo")
+#' b <- structure("b", class = "foo")
+#'
+#' is_s3vec(s3vec(a, b))  # TRUE
+#' is.s3vec(s3vec(a, b))  # TRUE
+#' 
+#' is_s3vec(a)            # FALSE
+#' 
 #' @export
+#' 
 is_s3vec <- function(x) {
 
   if (!inherits(x, "s3vec") || !has_common_class(x))
@@ -16,7 +39,10 @@ is_s3vec <- function(x) {
   isTRUE(get_s3vec_subclass(x) == get_common_class(x))
 }
 
+#' @rdname s3vec
+#' 
 #' @export
+#' 
 is.s3vec <- is_s3vec
 
 get_common_class <- function(x) {

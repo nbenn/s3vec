@@ -27,7 +27,7 @@ test_that("common class can be determined", {
                "character")
   expect_equal(get_common_class(list(structure("a", class = "foo"))),
                "foo")
-  expect_error(get_common_class(structure("a", class = "foo")))
+  expect_equal(get_common_class(structure("a", class = "foo")), "foo")
 
   expect_equal(get_common_class("a"), "character")
   expect_equal(get_common_class(c("a", 1L)), "character")
