@@ -17,3 +17,47 @@ You can install s3vec from github with:
 # install.packages("devtools")
 devtools::install_github("nbenn/s3vec")
 ```
+
+Hello World
+-----------
+
+Assume you have an s3 class `point`, representing a point in 2 dimensions. Now we create 100 instances of `point` and store them in the list `points`.
+
+``` r
+point <- function(x, y) {
+  stopifnot(is.numeric(x), is.numeric(y))
+  structure(list(x = x, y = y), class = "point")
+}
+
+points <- mapply(point, runif(100), runif(100), SIMPLIFY = FALSE)
+```
+
+Now we would like to implement a `max` function that returns the point with the greatest distance from the origin. We cannot use s3 dispatch on `point`, because our collection of points is a list. For a function like `abs`, this is less of an issue, as it can be applied to individual objects by iterating through the list.
+
+``` r
+abs.point <- function(x) {
+  sqrt(x$x ^ 2 + x$y ^ 2)
+}
+
+abs(points[[1]])
+#> [1] 0.4365035
+
+max.point <- function(x, ...) {
+  max(sapply(x, abs))
+}
+
+max(points)
+#> Error in max(points): invalid 'type' (list) of argument
+```
+
+In order to get around this issue, `s3vec` wraps an additional class (`s3vec`) around such a list, holding several objects of the same type and bring this type to the surface of this wrapped object. Like this, s3 dispatch can be used for the point class.
+
+``` r
+points <- as.s3vec(points)
+
+class(points)
+#> [1] "point" "s3vec"
+
+max(points)
+#> [1] 1.366007
+```
