@@ -58,3 +58,8 @@ as.s3vec.s3vec <- function(x, ...) {
 as.s3vec.list <- function(x, ...) {
   new_s3vec(x)
 }
+
+#' @export
+as.list.s3vec <- function(x, ...) {
+  unclass(x)
+}

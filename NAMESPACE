@@ -2,6 +2,7 @@
 
 S3method("[",s3vec)
 S3method("[<-",s3vec)
+S3method(as.list,s3vec)
 S3method(as.s3vec,list)
 S3method(as.s3vec,s3vec)
 export(as.s3vec)
