@@ -4,6 +4,9 @@ language: R
 sudo: false
 cache: packages
 
+r_github_packages:
+  - hadley/pkgdown
+
 r:
 - 3.1
 - 3.2
@@ -13,3 +16,14 @@ r:
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+before_deploy:
+  - Rscript -e 'pkgdown::build_site()'
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
+  local_dir: docs
