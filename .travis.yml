@@ -26,5 +26,5 @@ deploy:
   github_token: $GITHUB_TOKEN
   on:
     branch: master
-    r: release
+    condition: $TRAVIS_R_VERSION_STRING = release
   local_dir: docs
