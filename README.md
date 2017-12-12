@@ -21,7 +21,7 @@ devtools::install_github("nbenn/s3vec")
 Hello World
 -----------
 
-Assume you have an s3 class `point`, representing a point in 2 dimensions. Now we create 100 instances of `point` and store them in the list `points`.
+Assume we have an s3 class `point`, representing a point in 2 dimensions. Now we create 100 instances of `point` and store them in the list `points`.
 
 ``` r
 point <- function(x, y) {
@@ -32,7 +32,7 @@ point <- function(x, y) {
 points <- mapply(point, runif(100), runif(100), SIMPLIFY = FALSE)
 ```
 
-Now we would like to implement a `max` function that returns the point with the greatest distance from the origin. We cannot use s3 dispatch on `point`, because our collection of points is a list. For a function like `abs`, this is less of an issue, as it can be applied to individual objects by iterating through the list.
+We would like to implement a `max` function that returns the point with the greatest distance from the origin. We cannot use s3 dispatch on `point`, because our collection of points is a list. For a function like `abs`, this is less of an issue, as it can be applied to individual objects by iterating through the list.
 
 ``` r
 abs.point <- function(x) {
@@ -41,6 +41,8 @@ abs.point <- function(x) {
 
 abs(points[[1]])
 #> [1] 0.4365035
+sapply(points[1:5], abs)
+#> [1] 0.4365035 0.5849015 0.3050203 0.4567308 0.8658854
 
 max.point <- function(x, ...) {
   max(sapply(x, abs))
