@@ -3,11 +3,14 @@ context("test-s3vec.R")
 test_that("object creation works", {
   a <- structure("a", class = "foo")
   b <- structure("b", class = "foo")
+  c <- structure("c", class = "foo")
   expect_s3_class(s3vec(a), c("foo", "s3vec"))
 
   expect_s3_class(s3vec(a, b), c("foo", "s3vec"))
   expect_identical(s3vec(a, b),
                    new_s3vec(list(a, b)))
+  expect_s3_class(s3vec(a, b, c), c("foo", "s3vec"))
+
   c <- structure("c", class = "bar")
   expect_error(s3vec(a, b, c))
 

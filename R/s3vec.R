@@ -73,7 +73,7 @@ is_s3vec <- function(x) {
   if (length(all_classes) <= 1L)
     return(FALSE)
 
-  get_s3vec_subclass(x) == get_common_class(x)
+  isTRUE(get_s3vec_subclass(x) == get_common_class(x))
 }
 
 #' @export

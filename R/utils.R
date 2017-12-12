@@ -9,8 +9,10 @@ has_common_class <- function(x) {
 
   if (!is.list(x)) return(FALSE)
 
-  if (length(x) > 1L)
-    return(Reduce(identical, lapply(x, class)))
+  if (length(x) > 1L) {
+    all_classes <- lapply(x, class)
+    return(all(sapply(all_classes[-1], identical, all_classes[[1]])))
+  }
 
   TRUE
 }
