@@ -8,7 +8,6 @@ output:
 <!-- build with rmarkdown::render("README.Rmd") -->
 
 ```{r setup, include = FALSE}
-library(s3vec)
 set.seed(2018)
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -67,7 +66,9 @@ max(points)
 
 In order to get around this issue, `s3vec` wraps an additional class (`s3vec`) around such a list, holding several objects of the same type and bring this type to the surface of this wrapped object. Like this, s3 dispatch can be used for the point class.
 
-```{r s3vec}
+```{r s3vec, error = TRUE}
+library(s3vec)
+
 points <- as.s3vec(points)
 
 class(points)

@@ -55,6 +55,8 @@ max(points)
 In order to get around this issue, `s3vec` wraps an additional class (`s3vec`) around such a list, holding several objects of the same type and bring this type to the surface of this wrapped object. Like this, s3 dispatch can be used for the point class.
 
 ``` r
+library(s3vec)
+
 points <- as.s3vec(points)
 
 class(points)

@@ -5,7 +5,7 @@ sudo: false
 cache: packages
 
 r_github_packages:
-  - hadley/pkgdown
+  - r-lib/pkgdown
 
 r:
 - 3.1
@@ -15,10 +15,10 @@ r:
 - devel
 
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'
 
 before_deploy:
-  - Rscript -e 'pkgdown::build_site()'
+  - Rscript -e 'devtools::install_github("nbenn/s3vec"); pkgdown::build_site()'
 
 deploy:
   provider: pages
