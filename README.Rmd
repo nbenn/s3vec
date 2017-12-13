@@ -66,7 +66,7 @@ max(points)
 
 In order to get around this issue, `s3vec` wraps an additional class (`s3vec`) around such a list, holding several objects of the same type and bring this type to the surface of this wrapped object. Like this, s3 dispatch can be used for the point class.
 
-```{r s3vec, error = TRUE}
+```{r s3vec}
 library(s3vec)
 
 points <- as.s3vec(points)
@@ -75,3 +75,24 @@ class(points)
 
 max(points)
 ```
+
+Of course, in a simple scenario like this, one could argue that it makes more sense to use the point class as
+
+```{r point-vec}
+points <- point(runif(5), runif(5))
+max(points)
+```
+
+In which case, this enclosing class is not necessary. But a solution like this becomes more involved when for example there is structural variation among class instances (e.g. a mix of 2D and 3D points).
+
+```{r point-lst}
+point <- function(coords) {
+  stopifnot(is.numeric(coords))
+  structure(coords, class = "point")
+}
+
+points <- replicate(10L, point(runif(sample(2:3, 1L))), simplify = FALSE)
+sapply(points, length)
+```
+
+A completely vectorized approach as above is not as simple anymore and a list-based implementation might be better suited, in turn causing the problem described in the beginning.

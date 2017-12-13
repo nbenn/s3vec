@@ -65,3 +65,26 @@ class(points)
 max(points)
 #> [1] 1.366007
 ```
+
+Of course, in a simple scenario like this, one could argue that it makes more sense to use the point class as
+
+``` r
+points <- point(runif(5), runif(5))
+max(points)
+#> [1] 0.7664434
+```
+
+In which case, this enclosing class is not necessary. But a solution like this becomes more involved when for example there is structural variation among class instances (e.g. a mix of 2D and 3D points).
+
+``` r
+point <- function(coords) {
+  stopifnot(is.numeric(coords))
+  structure(coords, class = "point")
+}
+
+points <- replicate(10L, point(runif(sample(2:3, 1L))), simplify = FALSE)
+sapply(points, length)
+#>  [1] 3 3 3 2 2 2 2 2 2 2
+```
+
+A completely vectorized approach as above is not as simple anymore and a list-based implementation might be better suited, in turn causing the problem described in the beginning.
