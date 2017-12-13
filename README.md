@@ -29,17 +29,17 @@ point <- function(x, y) {
   structure(list(x = x, y = y), class = "point")
 }
 
-points <- mapply(point, runif(100), runif(100), SIMPLIFY = FALSE)
+points <- mapply(point, runif(100L), runif(100L), SIMPLIFY = FALSE)
 ```
 
 We would like to implement a `max` function that returns the point with the greatest distance from the origin. We cannot use s3 dispatch on `point`, because our collection of points is a list. For a function like `abs`, this is less of an issue, as it can be applied to individual objects by iterating through the list.
 
 ``` r
 abs.point <- function(x) {
-  sqrt(x$x ^ 2 + x$y ^ 2)
+  sqrt(x$x ^ 2L + x$y ^ 2L)
 }
 
-abs(points[[1]])
+abs(points[[1L]])
 #> [1] 0.4365035
 sapply(points[1:5], abs)
 #> [1] 0.4365035 0.5849015 0.3050203 0.4567308 0.8658854
@@ -69,7 +69,7 @@ max(points)
 Of course, in a simple scenario like this, one could argue that it makes more sense to use the point class as
 
 ``` r
-points <- point(runif(5), runif(5))
+points <- point(runif(5L), runif(5L))
 max(points)
 #> [1] 0.7664434
 ```
