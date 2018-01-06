@@ -43,6 +43,10 @@ is_s3vec <- function(x) {
 #' 
 is.s3vec <- is_s3vec
 
+#' @rdname s3vec
+#' 
+#' @export
+#' 
 get_common_class <- function(x) {
 
   assert_that(has_common_class(x))
@@ -56,6 +60,10 @@ get_common_class <- function(x) {
     class(x)
 }
 
+#' @rdname s3vec
+#' 
+#' @export
+#' 
 has_common_class <- function(x) {
 
   if (is.list(x) && length(x) > 1L) {
@@ -66,6 +74,10 @@ has_common_class <- function(x) {
   TRUE
 }
 
+#' @rdname s3vec
+#' 
+#' @export
+#' 
 get_s3vec_subclass <- function(x) {
 
   all_classes <- class(x)

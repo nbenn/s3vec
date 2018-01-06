@@ -5,6 +5,9 @@
 \alias{new_s3vec}
 \alias{as.s3vec}
 \alias{is.s3vec}
+\alias{get_common_class}
+\alias{has_common_class}
+\alias{get_s3vec_subclass}
 \title{Construct an s3vec object}
 \usage{
 s3vec(...)
@@ -14,6 +17,12 @@ new_s3vec(x)
 as.s3vec(x, ...)
 
 is.s3vec(x)
+
+get_common_class(x)
+
+has_common_class(x)
+
+get_s3vec_subclass(x)
 }
 \arguments{
 \item{...}{Individual s3 objects}
